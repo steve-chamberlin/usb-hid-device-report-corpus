@@ -2,14 +2,24 @@
 """Annotate USB HID report descriptors (and USB device and configuration descriptors).
 
 Reads hex bytes from a file, or from standard input if no file is given, and prints one line
-per descriptor item, indented to show the collection nesting:
+per descriptor item, indented to show the collection nesting.
 
+Example usage:
     python hid_annotate.py descriptor.txt
+    python hid_annotate.py --binary descriptor.bin
     echo 05 01 09 02 A1 01 ... C0 | python hid_annotate.py
 
-The input can be "05 01 09 02", "0x05, 0x01, 0x09, 0x02" or "05010902". Other text isn't allowed.
-Options: --config for a configuration descriptor (with its interface, HID and endpoint
-descriptors), --device for an 18-byte device descriptor.
+Text-format input is in hexadecimal format and can be "05 01 09 02", "0x05, 0x01, 0x09, 0x02"
+or "05010902". Other text isn't allowed.
+
+Options:
+    --config
+        Input is a configuration descriptor (with its interface, HID and endpoint descriptors).
+    --device
+        Input is an 18-byte device descriptor.
+    --binary
+        Read raw binary input instead of hex text. When a filename is given the specified file is
+        read as raw bytes, or when no filename is provided standard input is read as raw bytes.
 
 Written by Claude Code on behalf of Big Mess o' Wires for the USB HID device corpus. Public domain.
 """
@@ -370,11 +380,39 @@ def annotate_config(data):
 
 def main(args):
     mode = annotate_report
-    if args and args[0] in ('--config', '--device'):
-        mode = annotate_config if args[0] == '--config' else annotate_device
-        args = args[1:]
-    text = open(args[0]).read() if args else sys.stdin.read()
-    for line in mode(parse_hex(text)):
+    binary = False
+    args = list(args)
+
+    """Accept options in any order, before or after the filename."""
+    i = 0
+    while i < len(args):
+        if args[i] == '--binary':
+            binary = True
+            args.pop(i)
+            continue
+        if args[i] in ('--config', '--device'):
+            mode = annotate_config if args[i] == '--config' else annotate_device
+            args.pop(i)
+            continue
+        i += 1
+
+    if args:
+        filename = args[0]
+        if binary:
+            data = open(filename, 'rb').read()
+            out = mode(list(data))
+        else:
+            text = open(filename, 'r').read()
+            out = mode(parse_hex(text))
+    else:
+        if binary:
+            data = sys.stdin.buffer.read()
+            out = mode(list(data))
+        else:
+            text = sys.stdin.read()
+            out = mode(parse_hex(text))
+
+    for line in out:
         print(line)
 
 
