@@ -1,0 +1,186 @@
+TeckNet HyperTrak Gaming Mouse M009-V2 (04D9:A118)
+
+VID:PID    04D9:A118
+Type       Real device
+Source     https://wuffs.org/blog/mouse-adventures-part-5
+
+Interfaces
+  Interface 0: class 03 (HID), subclass 01 (boot), protocol 02 (mouse), endpoint max packet 8 bytes
+  Interface 1: class 03 (HID), subclass 00 (none), protocol 01 (keyboard), endpoint max packet 16 bytes
+  Interface 2: class 03 (HID), subclass 00 (none), protocol 00 (none), endpoint max packet 64 bytes
+
+
+==== Configuration descriptor (91 bytes) ====
+
+09 02 5B 00 03 01 00 A0 32      Configuration 1: total length 91, 3 interfaces, bus-powered, remote wakeup, max power 100 mA
+  09 04 00 00 01 03 01 02 00    Interface 0: 1 endpoint, class 03 (HID), subclass 01 (boot), protocol 02 (mouse)
+    09 21 10 01 00 01 22 47 00  HID 1.10, country code 0 (not localized), report descriptor 71 bytes
+    07 05 81 03 08 00 01        Endpoint 81 IN, interrupt, max packet 8, interval 1
+  09 04 01 00 01 03 00 01 00    Interface 1: 1 endpoint, class 03 (HID), subclass 00, protocol 01
+    09 21 10 01 00 01 22 8C 00  HID 1.10, country code 0 (not localized), report descriptor 140 bytes
+    07 05 82 03 10 00 04        Endpoint 82 IN, interrupt, max packet 16, interval 4
+  09 04 02 00 02 03 00 00 00    Interface 2: 2 endpoints, class 03 (HID), subclass 00, protocol 00
+    09 21 10 01 00 01 22 20 00  HID 1.10, country code 0 (not localized), report descriptor 32 bytes
+    07 05 83 03 40 00 04        Endpoint 83 IN, interrupt, max packet 64, interval 4
+    07 05 04 03 40 00 04        Endpoint 04 OUT, interrupt, max packet 64, interval 4
+
+Hex:
+09 02 5B 00 03 01 00 A0 32 09 04 00 00 01 03 01
+02 00 09 21 10 01 00 01 22 47 00 07 05 81 03 08
+00 01 09 04 01 00 01 03 00 01 00 09 21 10 01 00
+01 22 8C 00 07 05 82 03 10 00 04 09 04 02 00 02
+03 00 00 00 09 21 10 01 00 01 22 20 00 07 05 83
+03 40 00 04 07 05 04 03 40 00 04
+
+
+==== Interface 0 report descriptor (71 bytes) ====
+
+05 01     Usage Page (Generic Desktop)
+09 02     Usage (Mouse)
+A1 01     Collection (Application)
+09 01       Usage (Pointer)
+A1 00       Collection (Physical)
+05 09         Usage Page (Button)
+15 00         Logical Minimum (0)
+25 01         Logical Maximum (1)
+19 01         Usage Minimum (Button 1)
+29 05         Usage Maximum (Button 5)
+75 01         Report Size (1)
+95 05         Report Count (5)
+81 02         Input (Data,Var,Abs)
+95 03         Report Count (3)
+81 01         Input (Const,Array,Abs)
+05 01         Usage Page (Generic Desktop)
+16 01 80      Logical Minimum (-32767)
+26 FF 7F      Logical Maximum (32767)
+09 30         Usage (X)
+09 31         Usage (Y)
+75 10         Report Size (16)
+95 02         Report Count (2)
+81 06         Input (Data,Var,Rel)
+15 81         Logical Minimum (-127)
+25 7F         Logical Maximum (127)
+09 38         Usage (Wheel)
+75 08         Report Size (8)
+95 01         Report Count (1)
+81 06         Input (Data,Var,Rel)
+05 0C         Usage Page (Consumer)
+0A 38 02      Usage (AC Pan)
+95 01         Report Count (1)
+81 06         Input (Data,Var,Rel)
+C0          End Collection
+C0        End Collection
+
+Hex:
+05 01 09 02 A1 01 09 01 A1 00 05 09 15 00 25 01
+19 01 29 05 75 01 95 05 81 02 95 03 81 01 05 01
+16 01 80 26 FF 7F 09 30 09 31 75 10 95 02 81 06
+15 81 25 7F 09 38 75 08 95 01 81 06 05 0C 0A 38
+02 95 01 81 06 C0 C0
+
+
+==== Interface 1 report descriptor (140 bytes) ====
+
+05 01     Usage Page (Generic Desktop)
+09 06     Usage (Keyboard)
+A1 01     Collection (Application)
+85 01       Report ID (1)
+05 07       Usage Page (Keyboard)
+19 E0       Usage Minimum (Left Control)
+29 E7       Usage Maximum (Right GUI)
+15 00       Logical Minimum (0)
+25 01       Logical Maximum (1)
+75 01       Report Size (1)
+95 08       Report Count (8)
+81 02       Input (Data,Var,Abs)
+19 00       Usage Minimum (No event)
+2A FF 00    Usage Maximum (Key 0xFF)
+15 00       Logical Minimum (0)
+26 FF 00    Logical Maximum (255)
+75 08       Report Size (8)
+95 0E       Report Count (14)
+81 00       Input (Data,Array,Abs)
+C0        End Collection
+05 01     Usage Page (Generic Desktop)
+09 80     Usage (System Control)
+A1 01     Collection (Application)
+85 02       Report ID (2)
+19 81       Usage Minimum (System Power Down)
+29 83       Usage Maximum (System Wake Up)
+15 00       Logical Minimum (0)
+25 01       Logical Maximum (1)
+75 01       Report Size (1)
+95 03       Report Count (3)
+81 02       Input (Data,Var,Abs)
+95 05       Report Count (5)
+81 01       Input (Const,Array,Abs)
+C0        End Collection
+05 0C     Usage Page (Consumer)
+09 01     Usage (Consumer Control)
+A1 01     Collection (Application)
+85 03       Report ID (3)
+19 00       Usage Minimum (0x00)
+2A FF 02    Usage Maximum (0x2FF)
+15 00       Logical Minimum (0)
+26 FF 02    Logical Maximum (767)
+75 10       Report Size (16)
+95 01       Report Count (1)
+81 00       Input (Data,Array,Abs)
+C0        End Collection
+05 01     Usage Page (Generic Desktop)
+09 02     Usage (Mouse)
+A1 01     Collection (Application)
+85 04       Report ID (4)
+15 00       Logical Minimum (0)
+26 FF 7F    Logical Maximum (32767)
+09 30       Usage (X)
+09 31       Usage (Y)
+75 10       Report Size (16)
+95 02       Report Count (2)
+81 02       Input (Data,Var,Abs)
+C0        End Collection
+06 01 FF  Usage Page (Vendor-defined 0xFF01)
+09 01     Usage (0x01)
+A1 01     Collection (Application)
+85 06       Report ID (6)
+15 00       Logical Minimum (0)
+26 FF 00    Logical Maximum (255)
+09 2F       Usage (0x2F)
+75 08       Report Size (8)
+95 03       Report Count (3)
+81 00       Input (Data,Array,Abs)
+C0        End Collection
+
+Hex:
+05 01 09 06 A1 01 85 01 05 07 19 E0 29 E7 15 00
+25 01 75 01 95 08 81 02 19 00 2A FF 00 15 00 26
+FF 00 75 08 95 0E 81 00 C0 05 01 09 80 A1 01 85
+02 19 81 29 83 15 00 25 01 75 01 95 03 81 02 95
+05 81 01 C0 05 0C 09 01 A1 01 85 03 19 00 2A FF
+02 15 00 26 FF 02 75 10 95 01 81 00 C0 05 01 09
+02 A1 01 85 04 15 00 26 FF 7F 09 30 09 31 75 10
+95 02 81 02 C0 06 01 FF 09 01 A1 01 85 06 15 00
+26 FF 00 09 2F 75 08 95 03 81 00 C0
+
+
+==== Interface 2 report descriptor (32 bytes) ====
+
+06 00 FF  Usage Page (Vendor-defined 0xFF00)
+0A 00 FF  Usage (0xFF00)
+A1 01     Collection (Application)
+15 00       Logical Minimum (0)
+26 FF 00    Logical Maximum (255)
+09 20       Usage (0x20)
+75 08       Report Size (8)
+95 40       Report Count (64)
+81 02       Input (Data,Var,Abs)
+09 21       Usage (0x21)
+91 02       Output (Data,Var,Abs)
+09 22       Usage (0x22)
+95 08       Report Count (8)
+B1 02       Feature (Data,Var,Abs)
+C0        End Collection
+
+Hex:
+06 00 FF 0A 00 FF A1 01 15 00 26 FF 00 09 20 75
+08 95 40 81 02 09 21 91 02 09 22 95 08 B1 02 C0
